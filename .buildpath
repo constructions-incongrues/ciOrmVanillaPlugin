@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="config"/>
+	<buildpathentry kind="src" path="lib/filter/doctrine"/>
+	<buildpathentry kind="src" path="lib/form/doctrine"/>
+	<buildpathentry kind="src" path="lib/model/doctrine"/>
+	<buildpathentry kind="src" path="test/bin"/>
+	<buildpathentry kind="src" path="test/bootstrap"/>
+	<buildpathentry kind="src" path="test/fixtures/project/apps/frontend/config"/>
+	<buildpathentry kind="src" path="test/fixtures/project/apps/frontend/lib"/>
+	<buildpathentry kind="src" path="test/fixtures/project/apps/frontend/templates"/>
+	<buildpathentry kind="src" path="test/fixtures/project/config"/>
+	<buildpathentry kind="src" path="test/fixtures/project/lib/form"/>
+	<buildpathentry kind="src" path="test/fixtures/project/test/bootstrap"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>
