@@ -31,4 +31,14 @@ class PluginLUM_ZeitgeistTable extends Doctrine_Table
 
         return $q->fetchOne();
     }
+
+    public function getLastIssues($count = 50)
+    {
+        $q = $this->createQuery('LUM_Zeitgeist z')
+        ->where('z.ispublished = 1')
+        ->orderBy('z.zeitgeistid DESC')
+        ->limit($count);
+
+        return $q->execute();
+    }
 }
