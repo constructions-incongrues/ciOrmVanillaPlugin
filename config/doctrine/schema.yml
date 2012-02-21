@@ -1564,30 +1564,6 @@ LUM_User:
       primary: false
       notnull: false
       autoincrement: false
-    subscribecomment:
-      type: integer(1)
-      fixed: false
-      unsigned: false
-      primary: false
-      default: '1'
-      notnull: false
-      autoincrement: false
-    subscribedentireforum:
-      type: integer(1)
-      fixed: false
-      unsigned: false
-      primary: false
-      default: '0'
-      notnull: false
-      autoincrement: false
-    keepemailing:
-      type: integer(1)
-      fixed: false
-      unsigned: false
-      primary: false
-      default: '0'
-      notnull: false
-      autoincrement: false
 LUM_UserBookmark:
   connection: doctrine
   tableName: LUM_UserBookmark
