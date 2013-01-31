@@ -26,7 +26,8 @@ abstract class PluginLUM_Zeitgeist extends BaseLUM_Zeitgeist
         ->where('d.datecreated >= ?')
         ->andWhere('d.datecreated <= ?')
         ->andWhere('d.active = 1')
-        ->andWhere('r.ismix = 1');
+        ->andWhere('r.ismix = 1')
+        ->orderBy('d.name asc');
 
         $mixes = $q->execute(array($this->datestart, $this->dateend), Doctrine_Core::HYDRATE_ARRAY);
 
@@ -47,7 +48,8 @@ abstract class PluginLUM_Zeitgeist extends BaseLUM_Zeitgeist
         ->where('d.datecreated >= ?')
         ->andWhere('d.datecreated <= ?')
         ->andWhere('d.active = 1')
-        ->andWhere('r.ismix != 1');
+        ->andWhere('r.ismix != 1')
+        ->orderBy('d.name asc');
 
         $releases = $q->execute(array($this->datestart, $this->dateend), Doctrine_Core::HYDRATE_ARRAY);
 
@@ -98,5 +100,43 @@ abstract class PluginLUM_Zeitgeist extends BaseLUM_Zeitgeist
         $text = nl2br($this->getAnanasexmachina());
 
         return $text;
+    }
+
+    public function getNewDiscussions()
+    {
+        // d.DateCreated >= ? and <= ?
+        $q = Doctrine_Query::create()
+        ->select('d.discussionid, d.name, d.firstcommentid')
+        ->from('LUM_Discussion d')
+        ->leftJoin('d.LUM_Releases r')
+        ->leftJoin('d.LUM_Releases e')
+        ->where('d.datecreated >= ?')
+        ->andWhere('d.datecreated <= ?')
+        ->andWhere('d.active = 1')
+        ->andWhere('r.DiscussionID IS NULL')
+        ->andWhere('e.DiscussionID IS NULL')
+        ->orderBy('d.name asc');
+
+        return $q->execute(array($this->datestart, $this->dateend), Doctrine_Core::HYDRATE_ARRAY);
+    }
+
+    public function getActiveExistingDiscussions()
+    {
+        // d.DateCreated and <= ? / d.DateLastActive >= ? and <= ?
+        // d.DateCreated >= ? and <= ?
+        $q = Doctrine_Query::create()
+        ->select('d.discussionid, d.name, d.firstcommentid')
+        ->from('LUM_Discussion d')
+        ->leftJoin('d.LUM_Releases r')
+        ->leftJoin('d.LUM_Releases e')
+        ->where('d.datecreated <= ?')
+        ->andWhere('d.datelastactive >= ?')
+        ->andWhere('d.datelastactive <= ?')
+        ->andWhere('d.active = 1')
+        ->andWhere('r.DiscussionID IS NULL')
+        ->andWhere('e.DiscussionID IS NULL')
+        ->orderBy('d.name asc');
+
+        return $q->execute(array($this->datestart, $this->datestart, $this->dateend), Doctrine_Core::HYDRATE_ARRAY);
     }
 }
